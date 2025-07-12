@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>to do list</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f2f2;
+            text-align:center;
+            padding:40px;
+        }
+        h1{
+            color:#333;
+        }
+        #inputText{
+            padding: 10px;
+            width: 250px;
+            border: 3px solid #ccc;
+            border-radius:10px;
+            outline: none;
+            font-size: 20px;
+            /* text-align: left; */
+        }
+        #addbtn{
+            padding: 10px 20px;
+            margin-left: 10px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            font-size: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        #addbtn:hover{
+            background-color: #45a049;
+        }
+        ol{
+            list-style-type: decimal;
+            list-style-position: inside;
+            padding-left: 0;
+            margin-top: 20px;
+        }
+        li{
+            background-color: white;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0.1);
+            font-size: 18px;
+            text-align: left;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            list-style-position: inside;
+        }
+        button{
+            background-color: rgb(170, 8, 8);
+            color: rgb(255, 255, 255);
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            font-size: 10px;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: rgb(110, 2, 2);
+        }
+    </style>
+</head>
+<body>
+    <h1 id="heading">To do List </h1>
+    <input type ="text" id="inputText" placeholder="Enter the task">
+    <button id="addbtn" onclick="callbtn();">ADD</button>
+    <ol id="TaskList"></ol>
+
+    <script>
+        let tasks=JSON.parse(localStorage.getItem("tasks"))||[];
+        tasks.forEach((task,index)=>{
+            showTaskOnscreen(task,index);
+        });
+        function callbtn(){
+        let Inputtext=document.getElementById("inputText");
+        let showtask=Inputtext.value.trim();
+        if(showtask==""){
+            alert("enter the task first")
+        }else{
+            tasks.push(showtask);
+            localStorage.setItem("tasks",JSON.stringify(tasks));
+            showTaskOnscreen(showtask,tasks.length-1);
+            Inputtext.value="";
+         }
+        }
+
+        function showTaskOnscreen(task,index){
+            let newlist=document.createElement("li");
+
+            let taskText=document.createTextNode(task);//take parameter task inside the showtaskscreen
+
+            let delbtn=document.createElement("button");
+            delbtn.innerHTML="❌";
+            delbtn.style.margin="0px";
+            delbtn.style.float="right";
+            delbtn.onclick=function (){
+                newlist.remove();
+                tasks.splice(index,1);
+                localStorage.setItem("tasks",JSON.stringify(tasks));
+            }
+
+            newlist.appendChild(taskText);
+            newlist.appendChild(delbtn);
+            document.getElementById("TaskList").appendChild(newlist);
+         }
+    
+    </script>
+    
+</body>
+</html>
