@@ -6,10 +6,8 @@ This app allows users to add tasks, display them in a list, and delete them. Tas
 ---
 
 ## 🌐 Live Demo  
-🔗 [View To-Do List App](https://yourusername.github.io/todo-list/)  
-> Replace this link with your **actual GitHub Pages** URL.
+🔗 [View To-Do List App]( https://0kisiddhi.github.io/todo-list/)  
 
----
 
 ## 🚀 Features
 
